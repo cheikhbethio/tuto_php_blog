@@ -3,11 +3,11 @@ session_start();
 require '../app/Autoloader.php';;
 App\Autoloader::register();
 
-$app = \App\App::getInstance();
-$app->title = "titre de test";
+$app= \App\App::getInstance();
 
-$config = \App\Config::getInstance()->get('db_user');
-var_dump($app);
+var_dump($app->getTable('posts'));
+var_dump($app->getTable('users'));
+var_dump($app->getTable('categories'));
 
 
 /*

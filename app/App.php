@@ -2,6 +2,7 @@
 namespace App;
 class App{
     private static $_instance;
+    private $db_instance;
     public $title;
 
     public static function getInstance(){
@@ -11,6 +12,18 @@ class App{
         return self::$_instance;
     }
 
+    public function getTable($name){
+        $class_name = 'App\\Tables\\'. ucfirst($name).'Table';
+        return new $class_name();
+    }
+
+    public function getDB(){
+        $config = Config::getInstance();
+        if(is_null($this->db_instance)){
+            $this->db_instance = new Database($config->get('db_name'),$config->get('db_user'),$config->get('db_host'));
+        }
+        return $this->db_instance;
+    }
 
     /*const DR_NAME ='tuto_php_blog';
     const DR_USER ='root';
