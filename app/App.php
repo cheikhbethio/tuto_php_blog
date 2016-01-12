@@ -14,7 +14,7 @@ class App{
 
     public function getTable($name){
         $class_name = 'App\\Tables\\'. ucfirst($name).'Table';
-        return new $class_name();
+        return new $class_name($this->getDB());
     }
 
     public function getDB(){
