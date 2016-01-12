@@ -1,7 +1,16 @@
 <?php
+session_start();
 require '../app/Autoloader.php';;
 App\Autoloader::register();
 
+$app = \App\App::getInstance();
+$app->title = "titre de test";
+
+$config = \App\Config::getInstance()->get('db_user');
+var_dump($app);
+
+
+/*
 if (isset($_GET['p'])) {
     $p = $_GET['p'];
 }else{
@@ -24,4 +33,4 @@ if ($p === 'home'){
 
 $content=ob_get_clean();
 require '../pages/templates/default.php';
-
+*/

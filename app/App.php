@@ -1,7 +1,18 @@
 <?php
 namespace App;
 class App{
-    const DR_NAME ='tuto_php_blog';
+    private static $_instance;
+    public $title;
+
+    public static function getInstance(){
+        if(is_null(self::$_instance)){
+            self::$_instance = new App();
+        }
+        return self::$_instance;
+    }
+
+
+    /*const DR_NAME ='tuto_php_blog';
     const DR_USER ='root';
     const DR_PASS ='';
     const DR_HOST ='localhost';
@@ -26,5 +37,5 @@ class App{
     public static function notFound(){
         header("HTTP/1.0 404 Not Found");
         header('Location:index.php?p=404');
-    }
+    }*/
 }
