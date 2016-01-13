@@ -6,7 +6,7 @@ class Table{
     protected $table;
     protected $db;
 
-    public function __construct(Database $db){
+    public function __construct(Database\Database $db){
         $this->db = $db;
         if(is_null($this->table)){
             $parst = explode('\\', get_class($this));
