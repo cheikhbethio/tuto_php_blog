@@ -1,19 +1,22 @@
 <?php
-use App\Tables\Categorie;
-use App\Tables\Article;
-use App\App;
-
 $id = $_GET['id'];
-$categorie = Categorie::find($id);
-$articles = Article::lastByCatégirie($id);
-$categories = Categorie::all();
+$app =  App::getInstance();
 
-if($categorie === false){
-    App::notFound();
+$cat = $app->getTable('Category')->find($id);
+if($cat === false){
+    $app->notFound();
 }
+$articles = $app->getTable('Post')->lastByCatégirie($id);
+$categories = $app->getTable('Category')->all();
+
+/*echo 'last categorie ';
+var_dump(App::getInstance()->getTable('Category')->last());echo 'all categorie';
+var_dump($categories);echo 'last article by categorie';
+var_dump($articles);*/
+
 ?>
 
-<h2><?= $categorie->titre ?></h2>
+<h2><?= $cat->titre ?></h2>
 
 <div class="row">
     <div class="col-sm-8">
