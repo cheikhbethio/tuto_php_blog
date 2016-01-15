@@ -1,3 +1,19 @@
+<?php
+use \Core\HTML\BootstrapForm;
+    $form =new BootstrapForm(array($_POST));
+
+
+?>
+
+<form action="#" method="post">
+    <?php
+    echo $form->input('username');
+    echo $form->input('password');
+    echo $form->submit();
+    ?>
+
+</form>
+
 <div class="row">
     <div class="col-sm-8">
         <?php foreach(App::getInstance()->getTable('Post')->last() as $post) : ?>
