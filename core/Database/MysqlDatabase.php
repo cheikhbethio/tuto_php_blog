@@ -26,6 +26,11 @@ class MysqlDatabase extends Database{
     }
     public function query($statement, $class_name=null, $one=false){
         $req = $this->getPDO()->query($statement);
+        if(strpos($statement, 'update') === 0 ||
+            strpos($statement, 'insert') === 0 ||
+            strpos($statement, 'delete') === 0){
+            return $req;
+        }
         if($class_name===null){
             $req->setFetchMode(PDO::FETCH_OBJ);
         }else{
@@ -38,15 +43,28 @@ class MysqlDatabase extends Database{
         }
         return $datas;
     }
-    public function prepare($statement, $attribute, $class_name, $one = false){
+    public function prepare($statement, $attribute, $class_name=null, $one = false){
         $req = $this->getPDO()->prepare($statement);
-        $req->execute($attribute);
-        $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $res = $req->execute($attribute);
+        if(strpos($statement, 'update') === 0 ||
+            strpos($statement, 'insert') === 0 ||
+            strpos($statement, 'delete') === 0){
+            return $res;
+        }
+        if($class_name===null){
+            $req->setFetchMode(PDO::FETCH_OBJ);
+        }else{
+            $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        }
         if($one){
             $datas = $req->fetch();
         }else{
             $datas = $req->fetchAll();
         }
         return $datas;
+    }
+
+    public function lastInsertId()    {
+        return $this->getPDO()->lastInsertId();
     }
 }

@@ -29,9 +29,43 @@ class Table{
             SELECT *
             FROM " . $this->table);
     }
-
     public function find($id){
         return $this->query("select * from {$this->table} where id =? ", [$id], true);
+    }
+    public function update($id, $fields){
+        $sql_parts =[];
+        $attributes = [];
+        foreach($fields as $k => $v){
+            $sql_parts[]= "$k = ?";
+            $attributes[]=$v;
+        }
+        $attributes[] = $id;
+        $sql_parts = implode(',', $sql_parts);
+        return $this->query("update {$this->table} set $sql_parts where id =? ", $attributes, true);
+    }
+    public function create($fields){
+        $sql_parts =[];
+        $attributes = [];
+        foreach($fields as $k => $v){
+            $sql_parts[]= "$k = ?";
+            $attributes[]=$v;
+        }
+        $sql_parts = implode(',', $sql_parts);/*
+        var_dump($sql_parts);
+        var_dump($attributes);
+        die();**/
+        return $this->query("insert into {$this->table} set $sql_parts", $attributes, true);
+    }
+    public function delete($id){
+        return $this->query("delete from {$this->table}  where id =? ", [$id], true);
+    }
+    public function extractToList($key, $value){
+        $records = $this->all();
+        $result = [];
+        foreach($records as $v){
+            $result[$v->$key] = $v->$value;
+        }
+        return $result;
     }
 
 }

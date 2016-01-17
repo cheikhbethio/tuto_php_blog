@@ -9,10 +9,6 @@ if($cat === false){
 $articles = $app->getTable('Post')->lastByCatégirie($id);
 $categories = $app->getTable('Category')->all();
 
-/*echo 'last categorie ';
-var_dump(App::getInstance()->getTable('Category')->last());echo 'all categorie';
-var_dump($categories);echo 'last article by categorie';
-var_dump($articles);*/
 
 ?>
 

@@ -16,6 +16,8 @@ if($p==='home'){
     require ROOT . '/pages/posts/show.php';
 } elseif($p==='posts.category'){
     require ROOT . '/pages/posts/categorie.php';
+} elseif($p==='login'){
+    require ROOT . '/pages/users/login.php';
 }
 
 $content=ob_get_clean();
