@@ -13,7 +13,7 @@ class Form{
     protected $data;
     public $surround = 'p';
 
-    public function __construct($data){
+    public function __construct($data=[]){
         $this->data = $data;
     }
     protected function surround($html){
