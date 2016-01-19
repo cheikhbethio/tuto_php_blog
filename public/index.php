@@ -9,17 +9,18 @@ if(isset($_GET['p'])){
 }else{
     $p = 'home';
 }
-ob_start();
 if($p==='home'){
-    require ROOT . '/pages/posts/home.php';
+    $controller = new \App\Controller\PostsController();
+    $controller->index();
 } elseif($p==='posts.show'){
-    require ROOT . '/pages/posts/show.php';
+    $controller = new \App\Controller\PostsController();
+    $controller->show();
 } elseif($p==='posts.category'){
-    require ROOT . '/pages/posts/categorie.php';
+    $controller = new \App\Controller\PostsController();
+    $controller->categories();
 } elseif($p==='login'){
-    require ROOT . '/pages/users/login.php';
+    $controller = new \App\Controller\UsersController();
+    $controller->login();
 }
 
-$content=ob_get_clean();
-require '../pages/templates/default.php';
 
